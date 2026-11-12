@@ -1,0 +1,25 @@
+services:
+  api:
+    build: .
+    container_name: tender-collector-api
+    environment:
+      TENDER_DB_PATH: /data/tenders.db
+      TENDER_HTTP_TIMEOUT: "15"
+    ports:
+      - "8000:8000"
+    volumes:
+      - tender-data:/data
+    restart: unless-stopped
+
+  # 本地分页 HTML 示例公告站（纯静态文件，nginx 托管）
+  demo-site:
+    image: nginx:1.27-alpine
+    container_name: tender-demo-site
+    ports:
+      - "8001:80"
+    volumes:
+      - ./demo_site:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
+volumes:
+  tender-data:
