@@ -4,6 +4,8 @@ services:
     container_name: tender-collector-api
     environment:
       TENDER_DB_PATH: /data/tenders.db
+      TENDER_ATTACHMENT_DIR: /data/attachments
+      TENDER_ATTACHMENT_MAX_BYTES: "10485760"
       TENDER_HTTP_TIMEOUT: "15"
     ports:
       - "8000:8000"
